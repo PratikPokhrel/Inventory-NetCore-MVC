@@ -1,0 +1,45 @@
+﻿@model AuthenticateRequestViewModel;
+
+<section class="loginSecWrp">
+    <div class="wrapBlocksTxt">
+        <h2>Inventory Plus</h2>
+        <p>Find your Products,enter your username and we will bring up your Products</p>
+        <form asp-action="Login" asp-controller="Account" id="sign-up-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Username" placeholder="Enter Your Username" type="text" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+
+            <input type="password" placeholder="Enter Your Password" asp-for="Password">
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+
+            <div class="row">
+                    <a class="waves-effect waves-light btn" id="submit">Login</a>
+                <a class="waves-effect waves-light btn ml-2" asp-controller="Account" asp-action="SignUp" type="button">
+                    Sign Up
+                    <i class="material-icons right">send</i>
+                </a>
+            </div>
+
+            @*<button class="waves-effect waves-light" type="submit">Login</button>
+            <a class="btn waves-effect waves-light"  asp-controller="Auth" asp-action="SignUp" type="button" >
+                Submit
+                <i class="material-icons right">send</i>
+            </a>*@
+        </form>
+    </div>
+</section>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    $(document).ready(function () {
+        var form = document.getElementById("sign-up-form");
+        document.getElementById("submit").addEventListener("click", function () {
+            form.submit();
+        });
+    });
+</script>

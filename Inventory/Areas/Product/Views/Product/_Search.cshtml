@@ -1,0 +1,90 @@
+﻿@model ProductListViewModel
+
+@{
+    //this value should be same as ObjectInstanceName when ListJS is loaded in Index.cshtml page.
+    string listInstanceName = "ProductList";
+}
+
+<div class="projectBoard">
+    <table class="table">
+        <thead>
+            <tr class="row-sortable">
+                <th class="@Model.AddSortClass("Name")" onclick="@Model.AddSortEvent(listInstanceName,"Name")">
+                    Name
+                </th>
+                <th class="@Model.AddSortClass("Price")" onclick="@Model.AddSortEvent(listInstanceName,"Price")">
+                    Price
+                </th>
+
+                <th class="@Model.AddSortClass("Quantity")" onclick="@Model.AddSortEvent(listInstanceName,"Quantity")">
+                    Quantity
+                </th>
+                <th class="@Model.AddSortClass("Category")" onclick="@Model.AddSortEvent(listInstanceName,"Name")">
+                    Category
+                </th>
+                <th class="@Model.AddSortClass("Description")" onclick="@Model.AddSortEvent(listInstanceName,"Description")">
+                    Description
+                </th>
+                <th>
+                    Image
+                </th>
+
+                <th class="@Model.AddSortClass("Edit")">
+                    Actions
+                </th>
+
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        @*data-editurl="@Url.Action("Edit", "Leave", new { id = _leave.Id }, Context.Request.Scheme)" data-title="Edit Request"*@
+        @foreach (var _product in Model.Products)
+        {
+    <tr>
+        <td>@_product.Name</td>
+        <td>$@_product.Price</td>
+        <td>@_product.Quantity</td>
+        <td>@_product.Category?.Name</td>
+        <td>@_product.Description</td>
+        <td>
+            <div class="imgLog">
+                <img style="height:50px;" src=@_product.ImageUrl alt="">
+            </div>
+        </td>
+        <td>
+            <a class="small material-icons" style="color:mediumpurple; cursor: pointer" asp-area="Product" asp-controller="Product" asp-action="Edit" asp-route-id="@_product.Id">edit</a>
+            <i class="small material-icons" style="color:red; cursor: pointer" onclick="Inventory.ProductList.Delete('@_product.Id')">delete</i>
+        </td>
+
+    </tr>
+        }
+    </table>
+</div>
+<div class="dt-toolbar-footer">
+    <div class="col-sm-6 col-xs-12 hidden-xs">
+        <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">
+            @if (Model.Page * Model.RowsPerPage < Model.TotalRowCount)
+            {
+                <text>Showing @((Model.Page - 1) * Model.RowsPerPage + 1) to @(Model.Page * Model.RowsPerPage) of @Model.TotalRowCount entries</text>
+            }
+            else
+            {
+                <text>Showing @((Model.Page - 1) * Model.RowsPerPage + 1) to @Model.TotalRowCount entries</text>
+            }
+        </div>
+    </div><div class="col-xs-12 col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="dt_basic_paginate">
+            <ul class="pagination">
+                <li class="@(Model.Page == 1?"disabled":"") paginate_button previous" id="dt_basic_previous"><a onclick="Inventory.ProductList.SetPage('@(Model.Page - 1)')" aria-controls="dt_basic" data-dt-idx="0" tabindex="0">Previous</a></li>
+                @{
+                    foreach (int _page in Model.PaginatePages())
+                    {
+                        <li class="paginate_button @(Model.Page == _page?"active":"")"><a onclick="Inventory.ProductList.SetPage('@_page')">@_page</a></li>
+                    }
+                }
+                <li class="paginate_button next" id="dt_basic_next"><a onclick="Inventory.ProductList.SetPage('@(Model.Page + 1)')" aria-controls="dt_basic" data-dt-idx="8" tabindex="0">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

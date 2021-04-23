@@ -1,0 +1,77 @@
+﻿@model ProductListViewModel
+@{
+    ViewBag.Title = "Product List";
+}
+<form class="contentInside" id="FormSearchProductList">
+    <input type="hidden" asp-for="Page" />
+    <input type="hidden" asp-for="SortColumn" />
+    <input type="hidden" asp-for="SortOrder" />
+    <input type="hidden" asp-for="RowsPerPage" />
+    <div class="wrapperMainCNt">
+        <div class="headerHolidays">
+            <h3>Product List</h3>
+        </div>
+
+        <div class="linkAzure">
+            <div class="input-field s5 m5 ">
+                <input type="text" asp-for="Search" class="form-control" placeholder="Search" aria-controls="dt_basic" style="width:120px;">
+            </div>
+
+
+            <div class="input-field  s3 ml-2">
+                <select asp-for="CategoryId" id="select1"
+                        asp-items="@(new SelectList(Model.CategoryDropDown.OrderBy(e=>e.Name), "Id", "Name"))" onchange="Inventory.ProductList.Search()">
+                    <option value="">Select Category</option>
+                </select>
+            </div>
+
+
+            <a class="btn btn-primary ml-2" onclick="Inventory.ProductList.Search()">
+                <span class="fa fa-search"></span>
+                Search
+            </a>
+            @* <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> *@
+            <a class="btn-floating btn-large waves-effect waves-light red pulse" asp-area="Product" asp-controller="Product" asp-action="Add"><i class="material-icons">add</i> </a>
+        </div>
+
+        <div id="divSearchResult">
+            @await Html.PartialAsync("_Search", Model)
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+                ClassLoader.GetClassInstance({
+                    Script: "@Url.Content("~/Product/Scripts/ProductList.js")",
+                    ObjectName: "ProductList",
+                    InstanceName: "ProductList",
+                    InstanceCallback: function (params)
+                    {
+                        Inventory.ProductList.InitTable();
+                    }
+                });
+
+
+
+            //triggger search method on search input enter pressed
+              $(document).keypress(function (e) {
+                     if (e.which == 13) {
+                         e.preventDefault();
+                         Inventory.ProductList.Search();
+                         return false;
+                       }
+              });
+            //Materalize css inits
+            $('select').formSelect();
+            $('#dtp').datepicker();
+            $('#select1').formSelect();
+        });
+
+    </script>
+
+    @await Html.PartialAsync("/Views/Shared/_ValidationScriptsPartial.cshtml")
+}

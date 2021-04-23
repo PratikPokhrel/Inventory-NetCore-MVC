@@ -1,0 +1,57 @@
+﻿@model ProductListViewModel
+
+<div class="peopleListsing">
+    @foreach (var _product in Model.Products)
+    {
+        string categoryName = _product.Category == null ? "N/A" : _product.Category.Name;
+
+        <div class="blocksPeople">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src=@_product.ImageUrl />
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">@_product.Name <i class="material-icons right">more_vert</i></span>
+                    <span class="card-title grey-text text-darken-4">$@_product.Price</span>
+                    <span> <a asp-area="Product" asp-controller="Product" asp-action="Edit" asp-route-id="@_product.Id"><i class="material-icons">edit</i></a></span>
+                    <i class="material-icons" style="color:red; cursor: pointer" onclick="Inventory.ProductCardList.Delete('@_product.Id')">delete</i>
+                </div>
+                <div class="card-reveal" style="background: lightgoldenrodyellow">
+                    <span class="card-title grey-text text-darken-4">$@_product.Price<i class="material-icons right">close</i></span>
+                    <span class="card-title grey-text text-darken-4">Category:@categoryName</span>
+                    <p>@_product.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="dt-toolbar-footer">
+    <div class="col-sm-6 col-xs-12 hidden-xs">
+        <div class="dataTables_info" id="dt_basic_info" role="status" aria-live="polite">
+            @if (Model.Page * Model.RowsPerPage < Model.TotalRowCount)
+            {
+                <text>Showing @((Model.Page - 1) * Model.RowsPerPage + 1) to @(Model.Page * Model.RowsPerPage) of @Model.TotalRowCount entries</text>
+            }
+            else
+            {
+                <text>Showing @((Model.Page - 1) * Model.RowsPerPage + 1) to @Model.TotalRowCount entries</text>
+            }
+        </div>
+    </div><div class="col-xs-12 col-sm-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="dt_basic_paginate">
+            <ul class="pagination">
+                <li class="@(Model.Page == 1?"disabled":"") paginate_button previous" id="dt_basic_previous"><a onclick="Inventory.ProductCardList.SetPage('@(Model.Page - 1)')" aria-controls="dt_basic" data-dt-idx="0" tabindex="0">Previous</a></li>
+                @{
+                    foreach (int _page in Model.PaginatePages())
+                    {
+                        <li class="paginate_button @(Model.Page == _page?"active":"")"><a onclick="Inventory.ProductCardList.SetPage('@_page')">@_page</a></li>
+                    }
+                }
+                <li class="paginate_button next" id="dt_basic_next"><a onclick="Inventory.ProductCardList.SetPage('@(Model.Page + 1)')" aria-controls="dt_basic" data-dt-idx="8" tabindex="0">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+

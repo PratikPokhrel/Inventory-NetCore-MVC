@@ -1,0 +1,18 @@
+﻿
+
+<ul id="mainNavsec">
+    <div class="ProficeSec">
+        <span class="nameSecprf">
+            PP
+        </span>
+        <h3>@User.Identity.Name!</h3>
+        <form class="form-inline" asp-area="" asp-controller="Account" asp-action="Logout">
+            <button type="submit" class="nav-link btn btn-link text-info">Logout</button>
+        </form>
+    </div>
+
+    <li><a asp-area="@AreaConstants.Product" asp-controller="Product" asp-action="Index"><span class="material-icons">grid_on</span> Product</a></li>
+    <li><a asp-area="@AreaConstants.Product" asp-controller="Product" asp-action="Card_Index"><span class="material-icons">card_giftcard</span> Product Cards</a></li>
+
+
+</ul>

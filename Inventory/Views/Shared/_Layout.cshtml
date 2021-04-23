@@ -1,0 +1,128 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IHttpContextAccessor HttpContextAccessor
+
+@using Inventory.Web.Extensions
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/materialize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Microsoft Teams JavaScript API (via CDN) -->
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.7.0/js/MicrosoftTeams.min.js" integrity="sha384-00JbifySIlPvW32u9rSurgu8PujfL6XFdV9iNn4ZWyurJJ33MFvpwPqmCHDq9ADv" crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.initialize();
+    </script>
+</head>
+<body>
+    <div id="maincontent">
+        <header>
+        </header>
+
+        <div id="slide-out" class="sidenav">
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                @Html.Partial("_NavigationMenu");
+            }
+            else
+            {
+                <ul id="mainNavsec">
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                </ul>
+            }
+
+        </div>
+        <div id="mainTextWraps">
+            <header id="topheader">
+
+                <div class="iconBarsSec">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger secTrigger">
+                        <i class="material-icons">menu</i>
+                        Inventory
+                    </a>
+                </div>
+                <div class="headICons">
+                    <a href="#"><span class="lnr lnr-user"></span></a>
+                    @*<a asp-area="@AreaConstant.UserSetting" asp-controller="UserSetting" asp-action="Index"><span class="lnr lnr-cog"></span></a>
+                    <a asp-area="@AreaConstant.Setting" asp-controller="Setting" asp-action="Index"><span class="lnr lnr-briefcase"></span></a>*@
+                </div>
+            </header>
+
+            <main role="main">
+                @RenderBody()
+            </main>
+            <div id="form-modal" class="modal secwrapsMdls">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Rock Dove - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/Base/BaseEntityList.js"></script>
+    <script src="~/js/Base/tenant-globals-path.js"></script>
+    <script src="~/lib/ext/ClassLoader.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/notify.min.js" asp-append-version="true"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/materialize.min.js"></script>
+    <script type="text/javascript"></script>
+    <script src="~/js/site.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.js"></script>"
+
+
+
+
+
+    <script>
+        //var microsoftTeams;
+        $(document).ready(function () {
+
+           // microsoftTeams.initialize();
+
+            $('.sidenav').sidenav();
+            $('.carousel').carousel();
+            $('.dropdown-trigger').dropdown();
+            $('.datepicker').datepicker();
+            //$('select').formSelect();
+            $('.materialboxed').materialbox();
+            $('.timepicker').timepicker();
+            $('.modal').modal();
+            $('.sidenav-trigger ').on('click', function () {
+                $(this).parents('#maincontent').toggleClass('sidebar_inactive');
+            });
+            $('.tooltipped').tooltip();
+            $('#select2').formSelect();
+        });
+        var ClassLoader = new ClassLoader();
+        var APPLICATION_PATH = '@MyHttpContext.AppBaseUrl';
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

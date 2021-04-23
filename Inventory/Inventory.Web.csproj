@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-Inventory-2D10F01E-C3E4-4E13-A33F-DC5724DE11C3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Areas\Product\Scripts\ProductCardList.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Product\Scripts\ProductCardList.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inventory.Application\Inventory.Application.csproj" />
+    <ProjectReference Include="..\Inventory.Common\Inventory.Common.csproj" />
+    <ProjectReference Include="..\Inventory.DAL\Inventory.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Product\Models\" />
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
+</Project>

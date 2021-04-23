@@ -1,0 +1,89 @@
+﻿@model ProductListViewModel
+@{
+    ViewBag.Title = "Product List";
+    string listInstanceName = "ProductCardList";
+}
+<form class="contentInside" id="FormSearchProductCardList">
+    <input type="hidden" asp-for="Page" />
+    <input type="hidden" asp-for="SortColumn" />
+    <input type="hidden" asp-for="SortOrder" />
+    <input type="hidden" asp-for="RowsPerPage" />
+    <div class="wrapperMainCNt">
+        <div class="headerHolidays">
+            <h3>Product List</h3>
+        </div>
+
+        <div class="linkAzure">
+            <div class="input-field s5 m5 ">
+                <input type="text" asp-for="Search" class="form-control" placeholder="Search" aria-controls="dt_basic" style="width:120px;">
+            </div>
+
+
+            <div class="input-field  s3 ml-2">
+                <select asp-for="CategoryId" id="select1"
+                        asp-items="@(new SelectList(Model.CategoryDropDown.OrderBy(e=>e.Name), "Id", "Name"))" onchange="Inventory.ProductCardList.Search()">
+                    <option value="">Select Category</option>
+                </select>
+            </div>
+
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Order By</a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!" onclick="@Model.AddSortEvent(listInstanceName,"Price")">High To Low</a></li>
+                <li><a href="#!" onclick="@Model.AddSortEvent(listInstanceName,"Price")">Low To high</a></li>
+            </ul>
+
+
+            <a class="btn btn-primary ml-2" onclick="Inventory.ProductCardList.Search()">
+                <span class="fa fa-search"></span>
+                Search
+            </a>
+            @* <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a> *@
+            <a class="btn-floating btn-large waves-effect waves-light red pulse" asp-area="Product" asp-controller="Product" asp-action="Add"><i class="material-icons">add</i> </a>
+        </div>
+
+        <div id="divSearchResult">
+            @await Html.PartialAsync("_Search_Card", Model)
+        </div>
+    </div>
+</form>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+                ClassLoader.GetClassInstance({
+                    Script: "@Url.Content("~/Product/Scripts/ProductCardList.js")",
+                    ObjectName: "ProductCardList",
+                    InstanceName: "ProductCardList",
+                    InstanceCallback: function (params)
+                    {
+                        Inventory.ProductCardList.InitTable();
+                    }
+                });
+
+
+
+            //triggger search method on search input enter pressed
+              $(document).keypress(function (e) {
+                     if (e.which == 13) {
+                         e.preventDefault();
+                         Inventory.ProductCardList.Search();
+                         return false;
+                       }
+              });
+
+
+            //Materalize css inits
+            $('select').formSelect();
+            $('#dtp').datepicker();
+            $('#select1').formSelect();
+        });
+
+
+    </script>
+
+    @await Html.PartialAsync("/Views/Shared/_ValidationScriptsPartial.cshtml")
+}

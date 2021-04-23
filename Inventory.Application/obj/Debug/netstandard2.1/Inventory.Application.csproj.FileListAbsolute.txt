@@ -1,0 +1,14 @@
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.Application.deps.json
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.Application.dll
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.Application.pdb
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.AssemblyInfoInputs.cache
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.AssemblyInfo.cs
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.csproj.CoreCompileInputs.cache
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.dll
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.pdb
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.Common.dll
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.DAL.dll
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.Common.pdb
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\bin\Debug\netstandard2.1\Inventory.DAL.pdb
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.csprojAssemblyReference.cache
+C:\Users\Prateek\source\repos\Inventory\Inventory.Application\obj\Debug\netstandard2.1\Inventory.Application.csproj.CopyComplete
