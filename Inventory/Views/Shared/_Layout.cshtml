@@ -21,11 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.min.css" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <!-- Microsoft Teams JavaScript API (via CDN) -->
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.7.0/js/MicrosoftTeams.min.js" integrity="sha384-00JbifySIlPvW32u9rSurgu8PujfL6XFdV9iNn4ZWyurJJ33MFvpwPqmCHDq9ADv" crossorigin="anonymous"></script>
-    <script>
-        microsoftTeams.initialize();
-    </script>
+   
 </head>
 <body>
     <div id="maincontent">
@@ -57,8 +53,6 @@
                 </div>
                 <div class="headICons">
                     <a href="#"><span class="lnr lnr-user"></span></a>
-                    @*<a asp-area="@AreaConstant.UserSetting" asp-controller="UserSetting" asp-action="Index"><span class="lnr lnr-cog"></span></a>
-                    <a asp-area="@AreaConstant.Setting" asp-controller="Setting" asp-action="Index"><span class="lnr lnr-briefcase"></span></a>*@
                 </div>
             </header>
 
@@ -99,16 +93,13 @@
 
 
     <script>
-        //var microsoftTeams;
+      
         $(document).ready(function () {
-
-           // microsoftTeams.initialize();
 
             $('.sidenav').sidenav();
             $('.carousel').carousel();
             $('.dropdown-trigger').dropdown();
             $('.datepicker').datepicker();
-            //$('select').formSelect();
             $('.materialboxed').materialbox();
             $('.timepicker').timepicker();
             $('.modal').modal();
